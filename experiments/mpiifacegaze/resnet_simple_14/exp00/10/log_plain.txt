@@ -1,0 +1,347 @@
+[2023-03-03 09:20:16] __main__ INFO: mode: MPIIFaceGaze
+dataset:
+  dataset_dir: datasets/MPIIFaceGaze.h5
+transform:
+  mpiifacegaze_face_size: 224
+  mpiifacegaze_gray: False
+device: cuda
+model:
+  name: resnet_simple
+  backbone:
+    name: resnet_simple
+    pretrained: resnet18
+    resnet_block: basic
+    resnet_layers: [2, 2, 2]
+train:
+  batch_size: 32
+  optimizer: sgd
+  base_lr: 0.1
+  momentum: 0.9
+  nesterov: True
+  weight_decay: 0.0001
+  no_weight_decay_on_bn: False
+  loss: L1
+  seed: 0
+  val_first: True
+  val_period: 1
+  test_id: 10
+  val_ratio: 0.1
+  output_dir: experiments/mpiifacegaze/resnet_simple_14/exp00/
+  log_period: 100
+  checkpoint_period: 5
+  use_tensorboard: True
+  train_dataloader:
+    num_workers: 4
+    drop_last: True
+    pin_memory: False
+  val_dataloader:
+    num_workers: 4
+    pin_memory: False
+tensorboard:
+  train_images: False
+  val_images: False
+  model_params: False
+optim:
+  adam:
+    betas: (0.9, 0.999)
+scheduler:
+  epochs: 15
+  type: multistep
+  milestones: [10, 13]
+  lr_decay: 0.1
+  lr_min_factor: 0.001
+test:
+  test_id: 0
+  checkpoint: ''
+  output_dir: ''
+  batch_size: 256
+  dataloader:
+    num_workers: 2
+    pin_memory: False
+face_detector:
+  mode: dlib
+  dlib:
+    model: data/dlib/shape_predictor_68_face_landmarks.dat
+gaze_estimator:
+  checkpoint: ''
+  camera_params: ''
+  normalized_camera_params: data/calib/normalized_camera_params_eye.yaml
+  normalized_camera_distance: 0.6
+demo:
+  use_camera: True
+  display_on_screen: True
+  wait_time: 1
+  video_path: ''
+  output_dir: ''
+  output_file_extension: mp4
+  head_pose_axis_length: 0.05
+  gaze_visualization_length: 0.05
+  show_bbox: True
+  show_head_pose: True
+  show_landmarks: True
+  show_normalized_image: False
+  show_template_model: False
+cudnn:
+  benchmark: True
+  deterministic: False
+[2023-03-03 09:20:18] __main__ INFO: Val 0
+[2023-03-03 09:20:26] __main__ INFO: Epoch 0 loss 0.1624 angle error 14.43
+[2023-03-03 09:20:26] __main__ INFO: Elapsed 8.02
+[2023-03-03 09:20:26] __main__ INFO: Train 1
+[2023-03-03 09:20:27] __main__ INFO: Epoch 1 Step 0/1181 lr 0.100000 loss 0.1540 (0.1540) angle error 13.79 (13.79)
+[2023-03-03 09:20:32] __main__ INFO: Epoch 1 Step 100/1181 lr 0.100000 loss 0.1181 (0.1598) angle error 10.70 (13.03)
+[2023-03-03 09:20:38] __main__ INFO: Epoch 1 Step 200/1181 lr 0.100000 loss 0.1137 (0.1431) angle error 10.11 (12.13)
+[2023-03-03 09:20:43] __main__ INFO: Epoch 1 Step 300/1181 lr 0.100000 loss 0.1061 (0.1370) angle error 9.26 (11.77)
+[2023-03-03 09:20:48] __main__ INFO: Epoch 1 Step 400/1181 lr 0.100000 loss 0.1218 (0.1325) angle error 10.68 (11.47)
+[2023-03-03 09:20:53] __main__ INFO: Epoch 1 Step 500/1181 lr 0.100000 loss 0.1036 (0.1283) angle error 9.59 (11.17)
+[2023-03-03 09:20:58] __main__ INFO: Epoch 1 Step 600/1181 lr 0.100000 loss 0.0678 (0.1225) angle error 6.16 (10.71)
+[2023-03-03 09:21:04] __main__ INFO: Epoch 1 Step 700/1181 lr 0.100000 loss 0.0601 (0.1157) angle error 5.27 (10.13)
+[2023-03-03 09:21:09] __main__ INFO: Epoch 1 Step 800/1181 lr 0.100000 loss 0.0595 (0.1096) angle error 5.43 (9.60)
+[2023-03-03 09:21:14] __main__ INFO: Epoch 1 Step 900/1181 lr 0.100000 loss 0.0621 (0.1042) angle error 5.46 (9.14)
+[2023-03-03 09:21:19] __main__ INFO: Epoch 1 Step 1000/1181 lr 0.100000 loss 0.0641 (0.0994) angle error 5.69 (8.73)
+[2023-03-03 09:21:25] __main__ INFO: Epoch 1 Step 1100/1181 lr 0.100000 loss 0.0485 (0.0952) angle error 4.28 (8.36)
+[2023-03-03 09:21:29] __main__ INFO: Elapsed 63.42
+[2023-03-03 09:21:29] __main__ INFO: Val 1
+[2023-03-03 09:21:32] __main__ INFO: Epoch 1 loss 0.0513 angle error 4.56
+[2023-03-03 09:21:32] __main__ INFO: Elapsed 3.14
+[2023-03-03 09:21:32] __main__ INFO: Train 2
+[2023-03-03 09:21:33] __main__ INFO: Epoch 2 Step 0/1181 lr 0.100000 loss 0.0562 (0.0562) angle error 5.03 (5.03)
+[2023-03-03 09:21:38] __main__ INFO: Epoch 2 Step 100/1181 lr 0.100000 loss 0.0460 (0.0492) angle error 4.17 (4.37)
+[2023-03-03 09:21:43] __main__ INFO: Epoch 2 Step 200/1181 lr 0.100000 loss 0.0391 (0.0482) angle error 3.53 (4.29)
+[2023-03-03 09:21:48] __main__ INFO: Epoch 2 Step 300/1181 lr 0.100000 loss 0.0745 (0.0482) angle error 6.74 (4.29)
+[2023-03-03 09:21:54] __main__ INFO: Epoch 2 Step 400/1181 lr 0.100000 loss 0.0466 (0.0480) angle error 4.26 (4.27)
+[2023-03-03 09:21:59] __main__ INFO: Epoch 2 Step 500/1181 lr 0.100000 loss 0.0282 (0.0473) angle error 2.57 (4.20)
+[2023-03-03 09:22:04] __main__ INFO: Epoch 2 Step 600/1181 lr 0.100000 loss 0.0422 (0.0466) angle error 3.77 (4.14)
+[2023-03-03 09:22:09] __main__ INFO: Epoch 2 Step 700/1181 lr 0.100000 loss 0.0327 (0.0462) angle error 2.90 (4.10)
+[2023-03-03 09:22:15] __main__ INFO: Epoch 2 Step 800/1181 lr 0.100000 loss 0.0471 (0.0458) angle error 4.03 (4.07)
+[2023-03-03 09:22:20] __main__ INFO: Epoch 2 Step 900/1181 lr 0.100000 loss 0.0311 (0.0454) angle error 2.80 (4.03)
+[2023-03-03 09:22:25] __main__ INFO: Epoch 2 Step 1000/1181 lr 0.100000 loss 0.0452 (0.0450) angle error 4.06 (3.99)
+[2023-03-03 09:22:30] __main__ INFO: Epoch 2 Step 1100/1181 lr 0.100000 loss 0.0414 (0.0448) angle error 3.65 (3.98)
+[2023-03-03 09:22:35] __main__ INFO: Elapsed 62.64
+[2023-03-03 09:22:35] __main__ INFO: Val 2
+[2023-03-03 09:22:38] __main__ INFO: Epoch 2 loss 0.0493 angle error 4.40
+[2023-03-03 09:22:38] __main__ INFO: Elapsed 3.19
+[2023-03-03 09:22:38] __main__ INFO: Train 3
+[2023-03-03 09:22:38] __main__ INFO: Epoch 3 Step 0/1181 lr 0.100000 loss 0.0462 (0.0462) angle error 4.22 (4.22)
+[2023-03-03 09:22:44] __main__ INFO: Epoch 3 Step 100/1181 lr 0.100000 loss 0.0399 (0.0407) angle error 3.48 (3.62)
+[2023-03-03 09:22:49] __main__ INFO: Epoch 3 Step 200/1181 lr 0.100000 loss 0.0422 (0.0411) angle error 3.71 (3.66)
+[2023-03-03 09:22:54] __main__ INFO: Epoch 3 Step 300/1181 lr 0.100000 loss 0.0451 (0.0406) angle error 4.15 (3.61)
+[2023-03-03 09:22:59] __main__ INFO: Epoch 3 Step 400/1181 lr 0.100000 loss 0.0456 (0.0403) angle error 3.92 (3.59)
+[2023-03-03 09:23:05] __main__ INFO: Epoch 3 Step 500/1181 lr 0.100000 loss 0.0461 (0.0404) angle error 4.08 (3.59)
+[2023-03-03 09:23:10] __main__ INFO: Epoch 3 Step 600/1181 lr 0.100000 loss 0.0349 (0.0402) angle error 3.07 (3.57)
+[2023-03-03 09:23:15] __main__ INFO: Epoch 3 Step 700/1181 lr 0.100000 loss 0.0303 (0.0400) angle error 2.76 (3.56)
+[2023-03-03 09:23:20] __main__ INFO: Epoch 3 Step 800/1181 lr 0.100000 loss 0.0415 (0.0401) angle error 3.74 (3.56)
+[2023-03-03 09:23:26] __main__ INFO: Epoch 3 Step 900/1181 lr 0.100000 loss 0.0304 (0.0399) angle error 2.75 (3.54)
+[2023-03-03 09:23:31] __main__ INFO: Epoch 3 Step 1000/1181 lr 0.100000 loss 0.0456 (0.0400) angle error 4.06 (3.55)
+[2023-03-03 09:23:36] __main__ INFO: Epoch 3 Step 1100/1181 lr 0.100000 loss 0.0427 (0.0399) angle error 3.78 (3.54)
+[2023-03-03 09:23:40] __main__ INFO: Elapsed 62.33
+[2023-03-03 09:23:40] __main__ INFO: Val 3
+[2023-03-03 09:23:44] __main__ INFO: Epoch 3 loss 0.0361 angle error 3.22
+[2023-03-03 09:23:44] __main__ INFO: Elapsed 3.18
+[2023-03-03 09:23:44] __main__ INFO: Train 4
+[2023-03-03 09:23:44] __main__ INFO: Epoch 4 Step 0/1181 lr 0.100000 loss 0.0264 (0.0264) angle error 2.33 (2.33)
+[2023-03-03 09:23:49] __main__ INFO: Epoch 4 Step 100/1181 lr 0.100000 loss 0.0379 (0.0381) angle error 3.38 (3.37)
+[2023-03-03 09:23:54] __main__ INFO: Epoch 4 Step 200/1181 lr 0.100000 loss 0.0554 (0.0387) angle error 4.96 (3.42)
+[2023-03-03 09:24:00] __main__ INFO: Epoch 4 Step 300/1181 lr 0.100000 loss 0.0383 (0.0391) angle error 3.37 (3.46)
+[2023-03-03 09:24:05] __main__ INFO: Epoch 4 Step 400/1181 lr 0.100000 loss 0.0413 (0.0391) angle error 3.83 (3.46)
+[2023-03-03 09:24:10] __main__ INFO: Epoch 4 Step 500/1181 lr 0.100000 loss 0.0554 (0.0389) angle error 4.69 (3.45)
+[2023-03-03 09:24:15] __main__ INFO: Epoch 4 Step 600/1181 lr 0.100000 loss 0.0420 (0.0390) angle error 3.63 (3.45)
+[2023-03-03 09:24:21] __main__ INFO: Epoch 4 Step 700/1181 lr 0.100000 loss 0.0413 (0.0387) angle error 3.78 (3.43)
+[2023-03-03 09:24:26] __main__ INFO: Epoch 4 Step 800/1181 lr 0.100000 loss 0.0375 (0.0387) angle error 3.28 (3.43)
+[2023-03-03 09:24:31] __main__ INFO: Epoch 4 Step 900/1181 lr 0.100000 loss 0.0480 (0.0387) angle error 4.30 (3.43)
+[2023-03-03 09:24:37] __main__ INFO: Epoch 4 Step 1000/1181 lr 0.100000 loss 0.0429 (0.0386) angle error 3.76 (3.42)
+[2023-03-03 09:24:42] __main__ INFO: Epoch 4 Step 1100/1181 lr 0.100000 loss 0.0370 (0.0385) angle error 3.17 (3.42)
+[2023-03-03 09:24:46] __main__ INFO: Elapsed 62.54
+[2023-03-03 09:24:46] __main__ INFO: Val 4
+[2023-03-03 09:24:49] __main__ INFO: Epoch 4 loss 0.0398 angle error 3.53
+[2023-03-03 09:24:49] __main__ INFO: Elapsed 3.19
+[2023-03-03 09:24:49] __main__ INFO: Train 5
+[2023-03-03 09:24:50] __main__ INFO: Epoch 5 Step 0/1181 lr 0.100000 loss 0.0394 (0.0394) angle error 3.45 (3.45)
+[2023-03-03 09:24:55] __main__ INFO: Epoch 5 Step 100/1181 lr 0.100000 loss 0.0308 (0.0379) angle error 2.75 (3.37)
+[2023-03-03 09:25:00] __main__ INFO: Epoch 5 Step 200/1181 lr 0.100000 loss 0.0359 (0.0377) angle error 3.27 (3.35)
+[2023-03-03 09:25:05] __main__ INFO: Epoch 5 Step 300/1181 lr 0.100000 loss 0.0383 (0.0379) angle error 3.54 (3.37)
+[2023-03-03 09:25:11] __main__ INFO: Epoch 5 Step 400/1181 lr 0.100000 loss 0.0416 (0.0380) angle error 3.88 (3.37)
+[2023-03-03 09:25:16] __main__ INFO: Epoch 5 Step 500/1181 lr 0.100000 loss 0.0358 (0.0378) angle error 3.15 (3.36)
+[2023-03-03 09:25:21] __main__ INFO: Epoch 5 Step 600/1181 lr 0.100000 loss 0.0462 (0.0377) angle error 4.17 (3.35)
+[2023-03-03 09:25:26] __main__ INFO: Epoch 5 Step 700/1181 lr 0.100000 loss 0.0431 (0.0376) angle error 3.74 (3.34)
+[2023-03-03 09:25:32] __main__ INFO: Epoch 5 Step 800/1181 lr 0.100000 loss 0.0423 (0.0377) angle error 3.78 (3.35)
+[2023-03-03 09:25:37] __main__ INFO: Epoch 5 Step 900/1181 lr 0.100000 loss 0.0319 (0.0377) angle error 2.80 (3.34)
+[2023-03-03 09:25:42] __main__ INFO: Epoch 5 Step 1000/1181 lr 0.100000 loss 0.0486 (0.0377) angle error 4.34 (3.34)
+[2023-03-03 09:25:47] __main__ INFO: Epoch 5 Step 1100/1181 lr 0.100000 loss 0.0506 (0.0377) angle error 4.50 (3.34)
+[2023-03-03 09:25:52] __main__ INFO: Elapsed 62.48
+[2023-03-03 09:25:52] __main__ INFO: Val 5
+[2023-03-03 09:25:55] __main__ INFO: Epoch 5 loss 0.0302 angle error 2.68
+[2023-03-03 09:25:55] __main__ INFO: Elapsed 3.20
+[2023-03-03 09:25:55] fvcore.common.checkpoint INFO: Saving checkpoint to experiments/mpiifacegaze/resnet_simple_14/exp00/10/checkpoint_0005.pth
+[2023-03-03 09:25:55] __main__ INFO: Train 6
+[2023-03-03 09:25:55] __main__ INFO: Epoch 6 Step 0/1181 lr 0.100000 loss 0.0311 (0.0311) angle error 2.67 (2.67)
+[2023-03-03 09:26:01] __main__ INFO: Epoch 6 Step 100/1181 lr 0.100000 loss 0.0246 (0.0371) angle error 2.18 (3.28)
+[2023-03-03 09:26:06] __main__ INFO: Epoch 6 Step 200/1181 lr 0.100000 loss 0.0287 (0.0375) angle error 2.56 (3.33)
+[2023-03-03 09:26:11] __main__ INFO: Epoch 6 Step 300/1181 lr 0.100000 loss 0.0451 (0.0380) angle error 3.85 (3.36)
+[2023-03-03 09:26:16] __main__ INFO: Epoch 6 Step 400/1181 lr 0.100000 loss 0.0348 (0.0375) angle error 3.00 (3.32)
+[2023-03-03 09:26:22] __main__ INFO: Epoch 6 Step 500/1181 lr 0.100000 loss 0.0403 (0.0371) angle error 3.55 (3.28)
+[2023-03-03 09:26:27] __main__ INFO: Epoch 6 Step 600/1181 lr 0.100000 loss 0.0410 (0.0370) angle error 3.63 (3.28)
+[2023-03-03 09:26:32] __main__ INFO: Epoch 6 Step 700/1181 lr 0.100000 loss 0.0371 (0.0371) angle error 3.22 (3.29)
+[2023-03-03 09:26:37] __main__ INFO: Epoch 6 Step 800/1181 lr 0.100000 loss 0.0346 (0.0369) angle error 3.18 (3.27)
+[2023-03-03 09:26:43] __main__ INFO: Epoch 6 Step 900/1181 lr 0.100000 loss 0.0307 (0.0370) angle error 2.76 (3.28)
+[2023-03-03 09:26:48] __main__ INFO: Epoch 6 Step 1000/1181 lr 0.100000 loss 0.0246 (0.0370) angle error 2.15 (3.28)
+[2023-03-03 09:26:53] __main__ INFO: Epoch 6 Step 1100/1181 lr 0.100000 loss 0.0363 (0.0371) angle error 3.24 (3.29)
+[2023-03-03 09:26:57] __main__ INFO: Elapsed 62.39
+[2023-03-03 09:26:57] __main__ INFO: Val 6
+[2023-03-03 09:27:01] __main__ INFO: Epoch 6 loss 0.0283 angle error 2.52
+[2023-03-03 09:27:01] __main__ INFO: Elapsed 3.24
+[2023-03-03 09:27:01] __main__ INFO: Train 7
+[2023-03-03 09:27:01] __main__ INFO: Epoch 7 Step 0/1181 lr 0.100000 loss 0.0241 (0.0241) angle error 2.09 (2.09)
+[2023-03-03 09:27:06] __main__ INFO: Epoch 7 Step 100/1181 lr 0.100000 loss 0.0433 (0.0365) angle error 3.95 (3.24)
+[2023-03-03 09:27:12] __main__ INFO: Epoch 7 Step 200/1181 lr 0.100000 loss 0.0550 (0.0370) angle error 4.77 (3.29)
+[2023-03-03 09:27:17] __main__ INFO: Epoch 7 Step 300/1181 lr 0.100000 loss 0.0280 (0.0369) angle error 2.54 (3.27)
+[2023-03-03 09:27:22] __main__ INFO: Epoch 7 Step 400/1181 lr 0.100000 loss 0.0359 (0.0367) angle error 3.05 (3.26)
+[2023-03-03 09:27:27] __main__ INFO: Epoch 7 Step 500/1181 lr 0.100000 loss 0.0358 (0.0365) angle error 3.16 (3.24)
+[2023-03-03 09:27:33] __main__ INFO: Epoch 7 Step 600/1181 lr 0.100000 loss 0.0362 (0.0364) angle error 3.33 (3.23)
+[2023-03-03 09:27:38] __main__ INFO: Epoch 7 Step 700/1181 lr 0.100000 loss 0.0383 (0.0366) angle error 3.41 (3.24)
+[2023-03-03 09:27:43] __main__ INFO: Epoch 7 Step 800/1181 lr 0.100000 loss 0.0395 (0.0366) angle error 3.53 (3.24)
+[2023-03-03 09:27:49] __main__ INFO: Epoch 7 Step 900/1181 lr 0.100000 loss 0.0398 (0.0365) angle error 3.59 (3.24)
+[2023-03-03 09:27:54] __main__ INFO: Epoch 7 Step 1000/1181 lr 0.100000 loss 0.0244 (0.0366) angle error 2.19 (3.24)
+[2023-03-03 09:27:59] __main__ INFO: Epoch 7 Step 1100/1181 lr 0.100000 loss 0.0385 (0.0367) angle error 3.40 (3.25)
+[2023-03-03 09:28:03] __main__ INFO: Elapsed 62.68
+[2023-03-03 09:28:03] __main__ INFO: Val 7
+[2023-03-03 09:28:07] __main__ INFO: Epoch 7 loss 0.0381 angle error 3.41
+[2023-03-03 09:28:07] __main__ INFO: Elapsed 3.19
+[2023-03-03 09:28:07] __main__ INFO: Train 8
+[2023-03-03 09:28:07] __main__ INFO: Epoch 8 Step 0/1181 lr 0.100000 loss 0.0341 (0.0341) angle error 3.07 (3.07)
+[2023-03-03 09:28:12] __main__ INFO: Epoch 8 Step 100/1181 lr 0.100000 loss 0.0378 (0.0357) angle error 3.30 (3.17)
+[2023-03-03 09:28:17] __main__ INFO: Epoch 8 Step 200/1181 lr 0.100000 loss 0.0485 (0.0361) angle error 4.34 (3.20)
+[2023-03-03 09:28:23] __main__ INFO: Epoch 8 Step 300/1181 lr 0.100000 loss 0.0363 (0.0361) angle error 3.27 (3.20)
+[2023-03-03 09:28:28] __main__ INFO: Epoch 8 Step 400/1181 lr 0.100000 loss 0.0259 (0.0361) angle error 2.30 (3.20)
+[2023-03-03 09:28:33] __main__ INFO: Epoch 8 Step 500/1181 lr 0.100000 loss 0.0354 (0.0362) angle error 3.23 (3.21)
+[2023-03-03 09:28:39] __main__ INFO: Epoch 8 Step 600/1181 lr 0.100000 loss 0.0396 (0.0362) angle error 3.42 (3.21)
+[2023-03-03 09:28:44] __main__ INFO: Epoch 8 Step 700/1181 lr 0.100000 loss 0.0356 (0.0363) angle error 3.31 (3.22)
+[2023-03-03 09:28:49] __main__ INFO: Epoch 8 Step 800/1181 lr 0.100000 loss 0.0256 (0.0364) angle error 2.19 (3.22)
+[2023-03-03 09:28:54] __main__ INFO: Epoch 8 Step 900/1181 lr 0.100000 loss 0.0309 (0.0364) angle error 2.92 (3.22)
+[2023-03-03 09:28:59] __main__ INFO: Epoch 8 Step 1000/1181 lr 0.100000 loss 0.0278 (0.0363) angle error 2.51 (3.22)
+[2023-03-03 09:29:05] __main__ INFO: Epoch 8 Step 1100/1181 lr 0.100000 loss 0.0276 (0.0363) angle error 2.46 (3.22)
+[2023-03-03 09:29:09] __main__ INFO: Elapsed 62.52
+[2023-03-03 09:29:09] __main__ INFO: Val 8
+[2023-03-03 09:29:12] __main__ INFO: Epoch 8 loss 0.0358 angle error 3.20
+[2023-03-03 09:29:12] __main__ INFO: Elapsed 3.21
+[2023-03-03 09:29:12] __main__ INFO: Train 9
+[2023-03-03 09:29:13] __main__ INFO: Epoch 9 Step 0/1181 lr 0.100000 loss 0.0364 (0.0364) angle error 3.28 (3.28)
+[2023-03-03 09:29:18] __main__ INFO: Epoch 9 Step 100/1181 lr 0.100000 loss 0.0434 (0.0350) angle error 3.85 (3.11)
+[2023-03-03 09:29:23] __main__ INFO: Epoch 9 Step 200/1181 lr 0.100000 loss 0.0318 (0.0353) angle error 2.86 (3.13)
+[2023-03-03 09:29:28] __main__ INFO: Epoch 9 Step 300/1181 lr 0.100000 loss 0.0393 (0.0357) angle error 3.46 (3.16)
+[2023-03-03 09:29:34] __main__ INFO: Epoch 9 Step 400/1181 lr 0.100000 loss 0.0378 (0.0359) angle error 3.32 (3.18)
+[2023-03-03 09:29:39] __main__ INFO: Epoch 9 Step 500/1181 lr 0.100000 loss 0.0316 (0.0359) angle error 2.87 (3.18)
+[2023-03-03 09:29:44] __main__ INFO: Epoch 9 Step 600/1181 lr 0.100000 loss 0.0415 (0.0360) angle error 3.70 (3.19)
+[2023-03-03 09:29:50] __main__ INFO: Epoch 9 Step 700/1181 lr 0.100000 loss 0.0491 (0.0360) angle error 4.27 (3.19)
+[2023-03-03 09:29:55] __main__ INFO: Epoch 9 Step 800/1181 lr 0.100000 loss 0.0426 (0.0364) angle error 3.88 (3.22)
+[2023-03-03 09:30:00] __main__ INFO: Epoch 9 Step 900/1181 lr 0.100000 loss 0.0268 (0.0363) angle error 2.38 (3.22)
+[2023-03-03 09:30:05] __main__ INFO: Epoch 9 Step 1000/1181 lr 0.100000 loss 0.0503 (0.0362) angle error 4.26 (3.21)
+[2023-03-03 09:30:11] __main__ INFO: Epoch 9 Step 1100/1181 lr 0.100000 loss 0.0290 (0.0362) angle error 2.57 (3.21)
+[2023-03-03 09:30:15] __main__ INFO: Elapsed 62.65
+[2023-03-03 09:30:15] __main__ INFO: Val 9
+[2023-03-03 09:30:18] __main__ INFO: Epoch 9 loss 0.0372 angle error 3.35
+[2023-03-03 09:30:18] __main__ INFO: Elapsed 3.25
+[2023-03-03 09:30:18] __main__ INFO: Train 10
+[2023-03-03 09:30:19] __main__ INFO: Epoch 10 Step 0/1181 lr 0.100000 loss 0.0356 (0.0356) angle error 3.18 (3.18)
+[2023-03-03 09:30:24] __main__ INFO: Epoch 10 Step 100/1181 lr 0.100000 loss 0.0303 (0.0364) angle error 2.72 (3.21)
+[2023-03-03 09:30:29] __main__ INFO: Epoch 10 Step 200/1181 lr 0.100000 loss 0.0305 (0.0361) angle error 2.72 (3.19)
+[2023-03-03 09:30:34] __main__ INFO: Epoch 10 Step 300/1181 lr 0.100000 loss 0.0568 (0.0365) angle error 4.80 (3.22)
+[2023-03-03 09:30:40] __main__ INFO: Epoch 10 Step 400/1181 lr 0.100000 loss 0.0330 (0.0360) angle error 2.92 (3.18)
+[2023-03-03 09:30:45] __main__ INFO: Epoch 10 Step 500/1181 lr 0.100000 loss 0.0317 (0.0359) angle error 2.84 (3.18)
+[2023-03-03 09:30:50] __main__ INFO: Epoch 10 Step 600/1181 lr 0.100000 loss 0.0335 (0.0361) angle error 3.06 (3.20)
+[2023-03-03 09:30:55] __main__ INFO: Epoch 10 Step 700/1181 lr 0.100000 loss 0.0347 (0.0362) angle error 3.04 (3.20)
+[2023-03-03 09:31:01] __main__ INFO: Epoch 10 Step 800/1181 lr 0.100000 loss 0.0407 (0.0362) angle error 3.54 (3.20)
+[2023-03-03 09:31:06] __main__ INFO: Epoch 10 Step 900/1181 lr 0.100000 loss 0.0383 (0.0363) angle error 3.38 (3.21)
+[2023-03-03 09:31:11] __main__ INFO: Epoch 10 Step 1000/1181 lr 0.100000 loss 0.0418 (0.0363) angle error 3.64 (3.21)
+[2023-03-03 09:31:16] __main__ INFO: Epoch 10 Step 1100/1181 lr 0.100000 loss 0.0368 (0.0363) angle error 3.21 (3.21)
+[2023-03-03 09:31:21] __main__ INFO: Elapsed 62.55
+[2023-03-03 09:31:21] __main__ INFO: Val 10
+[2023-03-03 09:31:24] __main__ INFO: Epoch 10 loss 0.0450 angle error 3.99
+[2023-03-03 09:31:24] __main__ INFO: Elapsed 3.24
+[2023-03-03 09:31:24] fvcore.common.checkpoint INFO: Saving checkpoint to experiments/mpiifacegaze/resnet_simple_14/exp00/10/checkpoint_0010.pth
+[2023-03-03 09:31:24] __main__ INFO: Train 11
+[2023-03-03 09:31:24] __main__ INFO: Epoch 11 Step 0/1181 lr 0.010000 loss 0.0413 (0.0413) angle error 3.59 (3.59)
+[2023-03-03 09:31:30] __main__ INFO: Epoch 11 Step 100/1181 lr 0.010000 loss 0.0216 (0.0229) angle error 1.92 (2.05)
+[2023-03-03 09:31:35] __main__ INFO: Epoch 11 Step 200/1181 lr 0.010000 loss 0.0158 (0.0214) angle error 1.42 (1.91)
+[2023-03-03 09:31:40] __main__ INFO: Epoch 11 Step 300/1181 lr 0.010000 loss 0.0180 (0.0207) angle error 1.56 (1.85)
+[2023-03-03 09:31:45] __main__ INFO: Epoch 11 Step 400/1181 lr 0.010000 loss 0.0147 (0.0202) angle error 1.33 (1.80)
+[2023-03-03 09:31:51] __main__ INFO: Epoch 11 Step 500/1181 lr 0.010000 loss 0.0166 (0.0198) angle error 1.48 (1.77)
+[2023-03-03 09:31:56] __main__ INFO: Epoch 11 Step 600/1181 lr 0.010000 loss 0.0192 (0.0195) angle error 1.70 (1.74)
+[2023-03-03 09:32:01] __main__ INFO: Epoch 11 Step 700/1181 lr 0.010000 loss 0.0176 (0.0191) angle error 1.58 (1.71)
+[2023-03-03 09:32:06] __main__ INFO: Epoch 11 Step 800/1181 lr 0.010000 loss 0.0151 (0.0190) angle error 1.34 (1.69)
+[2023-03-03 09:32:12] __main__ INFO: Epoch 11 Step 900/1181 lr 0.010000 loss 0.0150 (0.0188) angle error 1.34 (1.68)
+[2023-03-03 09:32:17] __main__ INFO: Epoch 11 Step 1000/1181 lr 0.010000 loss 0.0215 (0.0187) angle error 1.91 (1.67)
+[2023-03-03 09:32:22] __main__ INFO: Epoch 11 Step 1100/1181 lr 0.010000 loss 0.0166 (0.0185) angle error 1.49 (1.65)
+[2023-03-03 09:32:27] __main__ INFO: Elapsed 62.53
+[2023-03-03 09:32:27] __main__ INFO: Val 11
+[2023-03-03 09:32:30] __main__ INFO: Epoch 11 loss 0.0192 angle error nan
+[2023-03-03 09:32:30] __main__ INFO: Elapsed 3.26
+[2023-03-03 09:32:30] __main__ INFO: Train 12
+[2023-03-03 09:32:30] __main__ INFO: Epoch 12 Step 0/1181 lr 0.010000 loss 0.0143 (0.0143) angle error 1.30 (1.30)
+[2023-03-03 09:32:35] __main__ INFO: Epoch 12 Step 100/1181 lr 0.010000 loss 0.0170 (0.0162) angle error 1.44 (1.45)
+[2023-03-03 09:32:41] __main__ INFO: Epoch 12 Step 200/1181 lr 0.010000 loss 0.0178 (0.0162) angle error 1.59 (1.45)
+[2023-03-03 09:32:46] __main__ INFO: Epoch 12 Step 300/1181 lr 0.010000 loss 0.0182 (0.0162) angle error 1.61 (1.45)
+[2023-03-03 09:32:51] __main__ INFO: Epoch 12 Step 400/1181 lr 0.010000 loss 0.0167 (0.0163) angle error 1.51 (1.46)
+[2023-03-03 09:32:57] __main__ INFO: Epoch 12 Step 500/1181 lr 0.010000 loss 0.0182 (0.0162) angle error 1.64 (1.45)
+[2023-03-03 09:33:02] __main__ INFO: Epoch 12 Step 600/1181 lr 0.010000 loss 0.0152 (0.0161) angle error 1.41 (nan)
+[2023-03-03 09:33:07] __main__ INFO: Epoch 12 Step 700/1181 lr 0.010000 loss 0.0178 (0.0161) angle error 1.65 (nan)
+[2023-03-03 09:33:12] __main__ INFO: Epoch 12 Step 800/1181 lr 0.010000 loss 0.0137 (0.0160) angle error 1.18 (nan)
+[2023-03-03 09:33:18] __main__ INFO: Epoch 12 Step 900/1181 lr 0.010000 loss 0.0129 (0.0159) angle error 1.17 (nan)
+[2023-03-03 09:33:23] __main__ INFO: Epoch 12 Step 1000/1181 lr 0.010000 loss 0.0138 (0.0159) angle error 1.22 (nan)
+[2023-03-03 09:33:28] __main__ INFO: Epoch 12 Step 1100/1181 lr 0.010000 loss 0.0141 (0.0158) angle error 1.27 (nan)
+[2023-03-03 09:33:32] __main__ INFO: Elapsed 62.65
+[2023-03-03 09:33:32] __main__ INFO: Val 12
+[2023-03-03 09:33:36] __main__ INFO: Epoch 12 loss 0.0179 angle error 1.60
+[2023-03-03 09:33:36] __main__ INFO: Elapsed 3.25
+[2023-03-03 09:33:36] __main__ INFO: Train 13
+[2023-03-03 09:33:36] __main__ INFO: Epoch 13 Step 0/1181 lr 0.010000 loss 0.0142 (0.0142) angle error 1.28 (1.28)
+[2023-03-03 09:33:41] __main__ INFO: Epoch 13 Step 100/1181 lr 0.010000 loss 0.0132 (0.0144) angle error 1.15 (1.30)
+[2023-03-03 09:33:47] __main__ INFO: Epoch 13 Step 200/1181 lr 0.010000 loss 0.0228 (0.0146) angle error 2.05 (1.31)
+[2023-03-03 09:33:52] __main__ INFO: Epoch 13 Step 300/1181 lr 0.010000 loss 0.0167 (0.0146) angle error 1.53 (1.31)
+[2023-03-03 09:33:57] __main__ INFO: Epoch 13 Step 400/1181 lr 0.010000 loss 0.0224 (0.0147) angle error 2.12 (1.32)
+[2023-03-03 09:34:02] __main__ INFO: Epoch 13 Step 500/1181 lr 0.010000 loss 0.0155 (0.0147) angle error 1.39 (1.32)
+[2023-03-03 09:34:08] __main__ INFO: Epoch 13 Step 600/1181 lr 0.010000 loss 0.0157 (0.0148) angle error 1.41 (1.33)
+[2023-03-03 09:34:13] __main__ INFO: Epoch 13 Step 700/1181 lr 0.010000 loss 0.0163 (0.0148) angle error 1.43 (1.33)
+[2023-03-03 09:34:18] __main__ INFO: Epoch 13 Step 800/1181 lr 0.010000 loss 0.0145 (0.0147) angle error 1.33 (1.32)
+[2023-03-03 09:34:23] __main__ INFO: Epoch 13 Step 900/1181 lr 0.010000 loss 0.0141 (0.0146) angle error 1.28 (1.31)
+[2023-03-03 09:34:29] __main__ INFO: Epoch 13 Step 1000/1181 lr 0.010000 loss 0.0147 (0.0146) angle error 1.32 (1.31)
+[2023-03-03 09:34:34] __main__ INFO: Epoch 13 Step 1100/1181 lr 0.010000 loss 0.0149 (0.0146) angle error 1.35 (1.31)
+[2023-03-03 09:34:38] __main__ INFO: Elapsed 62.54
+[2023-03-03 09:34:38] __main__ INFO: Val 13
+[2023-03-03 09:34:42] __main__ INFO: Epoch 13 loss 0.0175 angle error 1.56
+[2023-03-03 09:34:42] __main__ INFO: Elapsed 3.27
+[2023-03-03 09:34:42] __main__ INFO: Train 14
+[2023-03-03 09:34:42] __main__ INFO: Epoch 14 Step 0/1181 lr 0.001000 loss 0.0131 (0.0131) angle error 1.13 (1.13)
+[2023-03-03 09:34:47] __main__ INFO: Epoch 14 Step 100/1181 lr 0.001000 loss 0.0128 (0.0133) angle error 1.14 (1.20)
+[2023-03-03 09:34:52] __main__ INFO: Epoch 14 Step 200/1181 lr 0.001000 loss 0.0105 (0.0132) angle error 0.98 (1.19)
+[2023-03-03 09:34:58] __main__ INFO: Epoch 14 Step 300/1181 lr 0.001000 loss 0.0231 (0.0130) angle error 2.06 (1.17)
+[2023-03-03 09:35:03] __main__ INFO: Epoch 14 Step 400/1181 lr 0.001000 loss 0.0134 (0.0131) angle error 1.20 (1.18)
+[2023-03-03 09:35:08] __main__ INFO: Epoch 14 Step 500/1181 lr 0.001000 loss 0.0126 (0.0131) angle error 1.12 (1.18)
+[2023-03-03 09:35:14] __main__ INFO: Epoch 14 Step 600/1181 lr 0.001000 loss 0.0127 (0.0132) angle error 1.15 (1.19)
+[2023-03-03 09:35:19] __main__ INFO: Epoch 14 Step 700/1181 lr 0.001000 loss 0.0120 (0.0132) angle error 1.08 (1.19)
+[2023-03-03 09:35:24] __main__ INFO: Epoch 14 Step 800/1181 lr 0.001000 loss 0.0113 (0.0131) angle error 0.97 (1.18)
+[2023-03-03 09:35:29] __main__ INFO: Epoch 14 Step 900/1181 lr 0.001000 loss 0.0140 (0.0131) angle error 1.24 (1.18)
+[2023-03-03 09:35:35] __main__ INFO: Epoch 14 Step 1000/1181 lr 0.001000 loss 0.0109 (0.0130) angle error 0.99 (1.18)
+[2023-03-03 09:35:40] __main__ INFO: Epoch 14 Step 1100/1181 lr 0.001000 loss 0.0140 (0.0130) angle error 1.28 (nan)
+[2023-03-03 09:35:44] __main__ INFO: Elapsed 62.69
+[2023-03-03 09:35:44] __main__ INFO: Val 14
+[2023-03-03 09:35:48] __main__ INFO: Epoch 14 loss 0.0169 angle error nan
+[2023-03-03 09:35:48] __main__ INFO: Elapsed 3.29
+[2023-03-03 09:35:48] __main__ INFO: Train 15
+[2023-03-03 09:35:48] __main__ INFO: Epoch 15 Step 0/1181 lr 0.001000 loss 0.0139 (0.0139) angle error 1.22 (1.22)
+[2023-03-03 09:35:53] __main__ INFO: Epoch 15 Step 100/1181 lr 0.001000 loss 0.0185 (0.0131) angle error 1.59 (1.19)
+[2023-03-03 09:35:58] __main__ INFO: Epoch 15 Step 200/1181 lr 0.001000 loss 0.0126 (0.0131) angle error 1.12 (nan)
+[2023-03-03 09:36:04] __main__ INFO: Epoch 15 Step 300/1181 lr 0.001000 loss 0.0136 (0.0130) angle error 1.25 (nan)
+[2023-03-03 09:36:09] __main__ INFO: Epoch 15 Step 400/1181 lr 0.001000 loss 0.0225 (0.0129) angle error 1.98 (nan)
+[2023-03-03 09:36:14] __main__ INFO: Epoch 15 Step 500/1181 lr 0.001000 loss 0.0101 (0.0128) angle error 0.92 (nan)
+[2023-03-03 09:36:20] __main__ INFO: Epoch 15 Step 600/1181 lr 0.001000 loss 0.0200 (0.0128) angle error 1.74 (nan)
+[2023-03-03 09:36:25] __main__ INFO: Epoch 15 Step 700/1181 lr 0.001000 loss 0.0104 (0.0128) angle error 0.88 (nan)
+[2023-03-03 09:36:30] __main__ INFO: Epoch 15 Step 800/1181 lr 0.001000 loss 0.0116 (0.0128) angle error 1.00 (nan)
+[2023-03-03 09:36:35] __main__ INFO: Epoch 15 Step 900/1181 lr 0.001000 loss 0.0209 (0.0128) angle error 1.89 (nan)
+[2023-03-03 09:36:40] __main__ INFO: Epoch 15 Step 1000/1181 lr 0.001000 loss 0.0118 (0.0128) angle error 1.02 (nan)
+[2023-03-03 09:36:46] __main__ INFO: Epoch 15 Step 1100/1181 lr 0.001000 loss 0.0104 (0.0128) angle error 0.96 (nan)
+[2023-03-03 09:36:50] __main__ INFO: Elapsed 62.46
+[2023-03-03 09:36:50] __main__ INFO: Val 15
+[2023-03-03 09:36:53] __main__ INFO: Epoch 15 loss 0.0167 angle error 1.49
+[2023-03-03 09:36:53] __main__ INFO: Elapsed 3.32
+[2023-03-03 09:36:53] fvcore.common.checkpoint INFO: Saving checkpoint to experiments/mpiifacegaze/resnet_simple_14/exp00/10/checkpoint_0015.pth

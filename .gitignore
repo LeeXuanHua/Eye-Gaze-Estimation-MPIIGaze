@@ -101,3 +101,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Datasets & models
+datasets/*
+*.pth
