@@ -3,8 +3,14 @@ Designed to track and analyze eye movements in real-time, by leveraging computer
 
 Note that this is an implementation of [existing project](https://github.com/hysts/pytorch_mpiigaze).
 
-## Download Dataset
+## Setup & Download Dataset
 ```bash
+# Create Python Virtual Environment
+python -m venv .venv
+
+# Install requirements
+pip install -r requirements.txt
+
 # Download MPIIGaze - dataset focus on cropped eye images
 bash scripts/download_mpiigaze_dataset.sh
 python tools/preprocess_mpiigaze.py --dataset datasets/MPIIGaze -o datasets/
@@ -15,7 +21,7 @@ python tools/preprocess_mpiifacegaze.py --dataset datasets/MPIIFaceGaze_normaliz
 ```
 
 
-### Demo
+## Demo
 To run the gaze estimation from a webcam:
 
 1. Download the dlib pretrained model for landmark detection
@@ -33,11 +39,15 @@ To run the gaze estimation from a webcam:
     Specify the model path and the path of the camera calibration results in the configuration file as in [`configs/demo_mpiigaze_resnet.yaml`](configs/demo_mpiigaze_resnet.yaml)
 
     ```bash
+    # Running mpiigaze resnet - about 16fps
     python demo.py --config configs/demo_mpiigaze_resnet.yaml
+
+    # Running mpiifacegaze resnet - about 12fps
+    python demo.py --config configs/demo_mpiifacegaze_resnet_simple_14.yaml
     ```
 
 
-### Training and Evaluation
+## Training and Evaluation
 By running the following code, you can train a model using all the data except the person with ID 0, and run test on that person.
 
 ```bash
@@ -52,7 +62,7 @@ Run all training and evaluation for LeNet and ResNet-8 with default parameters, 
 ## Structure
 
 - `structure` - Specifies model parameters in YAML file e.g. [`configs/mpiigaze/lenet_train.yaml`](configs/mpiigaze/lenet_train.yaml)
-- `data` - camera calibration parameters, saved model files, and dlib files
+- `data` - camera calibration parameters, saved model files (alexnet pretrained weights not provided as it is too large), and dlib files
 - `dataset` - MPIIGaze and MPIIFaceGaze dataset downloaded earlier
 - `experiments` - logs from model train & evaluation
 - `gaze_estimation` - all the code data, with some notable folders:
