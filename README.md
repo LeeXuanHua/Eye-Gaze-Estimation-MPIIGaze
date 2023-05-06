@@ -84,6 +84,8 @@ Run all training and evaluation for LeNet and ResNet-8 with default parameters, 
 | LeNet           |              6.32              | 4.593 s/epoch |
 | ResNet-preact-8 |              5.73              | 9.265 s/epoch |
 
+![MPIIGaze Evaluation Error](./figures/gaze_error_graph.png)
+![MPIIGaze Training Time](./figures/gaze_time_graph.png)
 
 <b> Specific Details </b> 
 | Model           | Test Angle Error [degree] | Training Time [s/epoch] |
@@ -103,6 +105,9 @@ There is a slight difference with the training done by the sample code, as we di
 |:----------|:------------------------------:|--------------:|
 | AlexNet   |              5.09              |  131 s/epoch  |
 | ResNet-14 |              4.82              |   87 s/epoch  |
+
+![MPIIFaceGaze Evaluation Error](./figures/facegaze_error_graph.png)
+![MPIIFaceGaze Training Time](./figures/facegaze_time_graph.png)
 
 <b> Specific Details </b> 
 | Model           | Test Angle Error [degree] | Training Time [s/epoch] |
