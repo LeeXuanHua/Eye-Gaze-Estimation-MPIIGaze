@@ -8,7 +8,9 @@ import torch
 import yacs.config
 
 from .config import get_default_config
-
+from .gaze_estimator.common.face_model import FaceModel
+from .gaze_estimator.common.face_model_dlib import FaceModelDlib
+from .gaze_estimator.common.face_model_mediapipe import FaceModelMediaPipe
 
 def set_seeds(seed: int) -> None:
     random.seed(seed)
@@ -22,13 +24,23 @@ def setup_cudnn(config) -> None:
     torch.backends.cudnn.deterministic = config.cudnn.deterministic
 
 
+def get_3d_face_model(config) -> FaceModel:
+    if config.face_detector.mode == 'dlib':
+        return FaceModelDlib()
+    else:
+        return FaceModelMediaPipe()
+
 def load_config() -> yacs.config.CfgNode:
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str)
+    parser.add_argument('--face-detector', type=str, default='mediapipe', choices=['dlib', 'mediapipe'],
+        help='Face detection and facial landmark method (Default: mediapipe)')
     parser.add_argument('options', default=None, nargs=argparse.REMAINDER)
     args = parser.parse_args()
 
     config = get_default_config()
+    if args.face_detector:
+        config.face_detector.mode = args.face_detector
     if args.config is not None:
         config.merge_from_file(args.config)
     config.merge_from_list(args.options)

@@ -8,8 +8,9 @@ import yacs.config
 from ..models import create_model
 from ..transforms import create_transform
 from ..types import GazeEstimationMethod
-from .common import MODEL3D, Camera, Face, FacePartsName
+from .common import Camera, Face, FacePartsName
 from .head_pose_estimation import HeadPoseNormalizer, LandmarkEstimator
+from ..utils import get_3d_face_model
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +20,8 @@ class GazeEstimator:
 
     def __init__(self, config: yacs.config.CfgNode):
         self._config = config
+
+        self._face_model3d = get_3d_face_model(config)
 
         self.camera = Camera(config.gaze_estimator.camera_params)
         self._normalized_camera = Camera(
@@ -44,9 +47,9 @@ class GazeEstimator:
         return self._landmark_estimator.detect_faces(image)
 
     def estimate_gaze(self, image: np.ndarray, face: Face) -> None:
-        MODEL3D.estimate_head_pose(face, self.camera)
-        MODEL3D.compute_3d_pose(face)
-        MODEL3D.compute_face_eye_centers(face)
+        self._face_model3d.estimate_head_pose(face, self.camera)
+        self._face_model3d.compute_3d_pose(face)
+        self._face_model3d.compute_face_eye_centers(face)
 
         if self._config.mode == GazeEstimationMethod.MPIIGaze.name:
             for key in self.EYE_KEYS:

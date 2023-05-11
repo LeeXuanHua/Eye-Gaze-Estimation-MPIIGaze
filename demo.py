@@ -14,6 +14,7 @@ from gaze_estimation import GazeEstimationMethod, GazeEstimator
 from gaze_estimation.gaze_estimator.common import (Face, FacePartsName,
                                                    Visualizer)
 from gaze_estimation.utils import load_config
+from gaze_estimation.utils import get_3d_face_model
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -25,7 +26,9 @@ class Demo:
     def __init__(self, config: yacs.config.CfgNode):
         self.config = config
         self.gaze_estimator = GazeEstimator(config)
-        self.visualizer = Visualizer(self.gaze_estimator.camera)
+        face_model_3d = get_3d_face_model(config)
+        self.visualizer = Visualizer(self.gaze_estimator.camera,
+                                     face_model_3d.NOSE_INDEX)
 
         self.cap = self._create_capture()
         self.output_dir = self._create_output_dir()

@@ -88,7 +88,9 @@ config.test.dataloader.pin_memory = False
 
 # Face detector
 config.face_detector = ConfigNode()
-config.face_detector.mode = 'dlib'
+config.face_detector.mode = 'mediapipe'
+config.face_detector.mediapipe_max_num_faces = 3
+config.face_detector.mediapipe_static_image_mode = False
 config.face_detector.dlib = ConfigNode()
 config.face_detector.dlib.model = 'data/dlib/shape_predictor_68_face_landmarks.dat'
 

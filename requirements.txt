@@ -12,3 +12,4 @@ torch==1.13.1
 torchvision
 tqdm
 yacs
+mediapipe

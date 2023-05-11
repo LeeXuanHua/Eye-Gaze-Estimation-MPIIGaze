@@ -7,6 +7,10 @@ model:
     pretrained: resnet18
     resnet_block: basic
     resnet_layers: [2, 2, 2]
+face_detector:
+  mode: mediapipe
+  mediapipe_max_num_faces: 3
+  mediapipe_static_image_mode: False
 gaze_estimator:
   checkpoint: data/models/mpiifacegaze/resnet_simple_14/model.pth
   camera_params: data/calib/sample_params.yaml

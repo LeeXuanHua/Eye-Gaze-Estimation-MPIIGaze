@@ -2,6 +2,10 @@ mode: MPIIGaze
 device: cpu
 model:
   name: lenet
+face_detector:
+  mode: mediapipe
+  mediapipe_max_num_faces: 3
+  mediapipe_static_image_mode: False
 gaze_estimator:
   checkpoint: data/models/mpiigaze/lenet/model.pth
   camera_params: data/calib/sample_params.yaml
